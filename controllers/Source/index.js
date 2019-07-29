@@ -12,9 +12,7 @@ module.exports = {
           error: "Invalid url"
         });
       });
-  }
+  },
 
-  getFeed: (req, res, next) => {
-
-  }
+  getFeed: (req, res, next) => {}
 };

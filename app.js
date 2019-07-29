@@ -7,10 +7,23 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
 //Routes
-const Routes = require("./routes");
+const Routes = require("./routes/index");
 
 //Initializing Express
 const app = express();
+
+const mongoose = require("mongoose");
+mongoose
+  .connect(`mongodb://localhost/${process.env.MONGODB_URI}`, {
+    useNewUrlParser: true
+  })
+  .then(() => {
+    console.log("Successfully connected to MongoDB");
+  })
+  .catch(err => {
+    if (err) throw err;
+    console.log("Couldn't connect to the database");
+  });
 
 //middleware
 app.use(logger("dev"));

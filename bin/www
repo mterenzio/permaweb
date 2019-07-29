@@ -1,11 +1,16 @@
+
+
 /**
  * Module dependencies.
  */
 require("dotenv").config();
+const mongoose = require("mongoose")
 var app = require("../app");
 var debug = require("debug")("server:server");
 var http = require("http");
 
+
+const MONGODB_URI = process.env.MONGODB_URI;
 var port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
 
@@ -14,6 +19,18 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false})
+  .then(() => {
+    console.log("Successfully connected to MongoDB");
+    server.listen(port);
+    server.on("listening", onListening);
+  })
+  .catch(err => {
+    if (err) throw err;
+    server.on("error", onError);
+  });
 
 /**
  * Listen on provided port, on all network interfaces.
