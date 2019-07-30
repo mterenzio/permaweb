@@ -25,6 +25,15 @@ module.exports = {
         res.status(404).json({ err: `Error deleting an article ${err}` })
       );
   },
+  searchArticle: (req, res) => {
+    db.Article.find({ $text: { $search: req.body.search } })
+      .then(articles => res.json(articles))
+      .catch(err =>
+        res.status(404).json({
+          err: `Sorry, we couldn't find what you were looking for :( ${err}`
+        })
+      );
+  },
   viewAllArticles: (req, res) => {
     db.Article.find()
       .then(articles => res.json(articles))

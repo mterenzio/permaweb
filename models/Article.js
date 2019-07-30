@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const ArticleSchema = mongoose.Schema({
-  title: String,
+  title: { type: String, text: true },
   author: String,
   date_published: { type: Date, default: Date.now },
   dek: String,
   lead_image_url: String,
-  content: String,
+  content: { type: String, text: true },
   next_page_url: String,
   url: { type: String, required: true },
   domain: String,
