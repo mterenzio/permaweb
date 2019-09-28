@@ -15,8 +15,4 @@ module.exports = {
       });
   }
 
-  getFeed: (req, res, next) => {
-    res.json('hi');
-  }
-
 };

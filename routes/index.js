@@ -10,6 +10,5 @@ router.get('/', function(req, res, next) {
 
 
 router.route("/article").post(SourceController.getArticle);
-router.route("/feed").post(SourceController.getFeed);
 
 module.exports = router;
