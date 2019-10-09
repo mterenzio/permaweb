@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@ampproject/toolbox-cache-url": "^1.0.1",
     "@postlight/mercury-parser": "^2.1.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -16,6 +17,7 @@
     "hbs": "~4.0.1",
     "iconv": "^2.3.5",
     "morgan": "~1.9.0",
+    "opmlparser": "^0.8.0",
     "request": "^2.88.0",
     "serve-favicon": "~2.4.5",
     "zlib": "^1.0.5"
