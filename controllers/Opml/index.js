@@ -1,6 +1,6 @@
 var OpmlParser = require('opmlparser')
   , request = require('request')
-  , index = {};
+  , feeds = [];
 
 module.exports = {
 
@@ -11,7 +11,8 @@ module.exports = {
     // Some feeds do not respond without user-agent and accept headers.
     opmlreq.setHeader('user-agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36');
     opmlreq.setHeader('accept', 'text/html,application/xhtml+xml');
-    var opmlparser = new OpmlParser();
+    var opmlparser = new OpmlParser(),
+    counter = 0;
     opmlreq.on('error', function (error) {
       // handle any request errors
       console.log('error making opml request');
@@ -43,40 +44,16 @@ module.exports = {
 
       while (outline = stream.read()) {
         console.log(outline);
-        index[outline['#id']] = outline;
+        if (outline['#type'] === 'feed') {
+          counter++;
+          console.log('Got feed: "%s" <%s>', outline.title, outline.xmlurl);
+          feeds.push(outline);
+        }
       }
     });
     opmlparser.on('end', function () {
-      console.log('Here\'s my hierarchy.');
-
-      var stack = Object.keys(index).reduce(function (stack, id) {
-        var outline = index[id]
-          , i
-          , children;
-        if (stack[0]['#id'] === outline['#parentid']) {
-          stack[0].children || (stack[0].children = {});
-          stack[0].children[id] = outline;
-        }
-        else if (stack[0].children && outline['#parentid'] in stack[0].children) {
-          stack.unshift(stack[0].children[outline['#parentid']]);
-          stack[0].children || (stack[0].children = {});
-          stack[0].children[id] = outline;
-        }
-        else {
-          // unwind the stack as much as needed
-          for (i = stack.length - 1; i >= 0; i--) {
-            children = stack.shift();
-            stack[0].children[children['#id']] = children;
-            if (stack[0]['#id'] === outline['#parentid']) {
-              stack[0].children[id] = outline;
-              break;
-            }
-          }
-        }
-        return stack;
-      }, [ { 'text': 'root', '#id': 0, children: {} } ]);
-      console.log('All done.');
-      res.json(stack)
+      console.log('All done. Found %s feeds.', counter);
+      res.json(feeds)
     });
   }
 
