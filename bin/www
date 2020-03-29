@@ -3,11 +3,11 @@
 /**
  * Module dependencies.
  */
-
+require('dotenv').config()
 var app = require('../app');
-require('../scripts/updateFeeds');
 var debug = require('debug')('api-open-news:server');
 var http = require('http');
+const https = require('https');
 
 /**
  * Get port from environment and store in Express.
@@ -20,7 +20,15 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+ if (process.env.NODE_ENV == 'production') {
+   var server = https.createServer({
+     key: fs.readFileSync('/etc/letsencrypt/live/permaweb.news/privkey.pem'),
+     cert: fs.readFileSync('/etc/letsencrypt/live/permaweb.news/fullchain.pem'),
+     ca: fs.readFileSync('/etc/letsencrypt/live/permaweb.news/chain.pem')
+   }, app)
+ } else {
+   var server = http.createServer(app)
+ }
 
 /**
  * Listen on provided port, on all network interfaces.
