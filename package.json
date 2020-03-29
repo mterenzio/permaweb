@@ -25,6 +25,6 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
-    "@babel/node": "^7.6.3"
+    
   }
 }
