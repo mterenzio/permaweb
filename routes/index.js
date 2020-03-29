@@ -6,8 +6,8 @@ const FeedController = require("../controllers/Feed");
 const AmpController = require("../controllers/Amp");
 const OpmlController = require("../controllers/Opml");
 const PermawebController = require("../controllers/Permaweb");
-const LinkedDataController = require("../app/controllers/LinkedData");
-const SitemapController = require("../app/controllers/Sitemap");
+const LinkedDataController = require("../controllers/LinkedData");
+const SitemapController = require("../controllers/Sitemap");
 
 /* GET home page */
 router.get('/', function(req, res, next) {

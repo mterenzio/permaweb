@@ -1,4 +1,4 @@
-const Arweave = require("arweave");
+const Arweave = require('arweave/node');
 
 module.exports = {
 
