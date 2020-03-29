@@ -24,7 +24,5 @@
     "sitemapper": "^3.0.5",
     "zlib": "^1.0.5"
   },
-  "devDependencies": {
-    
-  }
+  "devDependencies": {}
 }
