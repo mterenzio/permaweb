@@ -9,7 +9,7 @@ const PermawebController = require("../controllers/Permaweb");
 const LinkedDataController = require("../app/controllers/LinkedData");
 const SitemapController = require("../app/controllers/Sitemap");
 
-/* GET home page. */
+/* GET home page */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'api.permaweb.news' });
 });
