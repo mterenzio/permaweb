@@ -19,14 +19,7 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
- if (process.env.NODE_ENV == 'production') {
-   var server = https.createServer({
-
-   }, app)
- } else {
-   var server = http.createServer(app)
- }
+var server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
