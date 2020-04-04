@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'api.permaweb.news' });
 });
 
-router.route("/article").post(ArticleController.getArticle);
+router.route("/article").post(ArticleController.getArticleData);
 
 router.route("/feed").post(FeedController.getFeed);
 

@@ -2,7 +2,7 @@ const Mercury = require("@postlight/mercury-parser");
 
 module.exports = {
 
-  getArticle: (req, res, next) => {
+  getArticleData: (req, res, next) => {
     Mercury.parse(req.body.url, { contentType: "text" })
       .then(result => {
         res.json(result);
