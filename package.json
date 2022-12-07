@@ -14,7 +14,7 @@
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "express": "^4.15.5",
+    "express": "^4.17.3",
     "feedparser": "^2.2.9",
     "hbs": "~4.0.1",
     "iconv": "^2.3.5",
